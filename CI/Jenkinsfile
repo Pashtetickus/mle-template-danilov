@@ -16,7 +16,7 @@ options {
         stage('Clone github repository') {
             steps {
                 cleanWs()
-                bat 'chcp 65001 && git clone -b main https://github.com/IcyAltair/mle-template.git'
+                bat 'chcp 65001 && git clone -b main https://github.com/Pashtetickus/mle-template-danilov.git'
 				}
 			}
 
@@ -86,16 +86,17 @@ options {
             }
         }
 
-        stage('Push'){
-            steps{
-                bat 'chcp 65001 && docker push altairzero/mle-template:latest'
+        // stage('Push'){
+        //     steps{
+        //         bat 'chcp 65001 && docker push altairzero/mle-template:latest'
+        //     }
+        // }
+
+        post {
+            always {
+                bat 'chcp 65001 && docker logout'
             }
         }
 	}
 
-    post {
-        always {
-            bat 'chcp 65001 && docker logout'
-        }
-    }
 }
