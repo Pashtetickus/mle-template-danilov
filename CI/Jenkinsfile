@@ -97,8 +97,8 @@ options {
 
     post {
         always {
-            // bat 'chcp 65001 && docker logout'
-            echo 'WORKING'
+            bat 'chcp 65001 && docker logout'
+            // echo 'WORKING'
         }
     }
 
