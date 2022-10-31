@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDS=credentials('mle-template')
+        DOCKERHUB_CREDS=credentials('jenkins-homework')
         LC_ALL = "en_US.UTF-8"
         LANG    = "en_US.UTF-8"
         LANGUAGE = "en_US.UTF-8"
@@ -26,15 +26,15 @@ options {
         stage('Pull image'){
             steps{
                 bat '''
-                        docker pull altairzero/mle-template:latest
+                        docker pull pashtetick/mle-template-danilov:latest
                 '''
             }
         }
 
         stage('Run container'){
             steps{
-                bat '''
-                        docker run --name mle-template -p 80:5556 -d altairzero/mle-template:latest
+                bat encoding: 'UTF-8', script: '''
+                        docker run --name mle-template-danilov -p 80:5556 -d pashtetick/mle-template-danilov:latest
                 '''
             }
         }
@@ -42,7 +42,7 @@ options {
 
     post {
         always {
-            bat 'docker stop mle-template && docker logout'
+            bat 'docker stop mle-template-danilov && docker logout'
         }
     }
 }
