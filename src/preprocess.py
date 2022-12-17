@@ -1,10 +1,9 @@
-import configparser
+import sys
 import os
+import traceback
+import configparser
 import pandas as pd
 from sklearn.model_selection import train_test_split
-import sys
-import traceback
-
 from logger import Logger
 
 TEST_SIZE = 0.2
@@ -12,25 +11,28 @@ SHOW_LOG = True
 
 
 class DataMaker():
+    """Collect methods for data preprocessing and splitting into train/test sets."""
 
-    def __init__(self) -> None:
+    def __init__(self, dataset_name='winequality-red') -> None:
+        """Inits DataMaker with all required paths."""
         logger = Logger(SHOW_LOG)
         self.config = configparser.ConfigParser()
         self.log = logger.get_logger(__name__)
         self.project_path = os.path.join(os.getcwd(), "data")
-        self.data_path = os.path.join(self.project_path, "Iris.csv")
-        self.X_path = os.path.join(self.project_path, "Iris_X.csv")
-        self.y_path = os.path.join(self.project_path, "Iris_y.csv")
-        self.train_path = [os.path.join(self.project_path, "Train_Iris_X.csv"), os.path.join(
-            self.project_path, "Train_Iris_y.csv")]
-        self.test_path = [os.path.join(self.project_path, "Test_Iris_X.csv"), os.path.join(
-            self.project_path, "Test_Iris_y.csv")]
+        self.data_path = os.path.join(self.project_path, f"{dataset_name}.csv")
+        self.X_path = os.path.join(self.project_path, f"{dataset_name}_X.csv")
+        self.y_path = os.path.join(self.project_path, f"{dataset_name}_y.csv")
+        self.train_path = [os.path.join(self.project_path, f"Train_{dataset_name}_X.csv"), os.path.join(
+            self.project_path, f"Train_{dataset_name}_y.csv")]
+        self.test_path = [os.path.join(self.project_path, f"Test_{dataset_name}_X.csv"), os.path.join(
+            self.project_path, f"Test_{dataset_name}_y.csv")]
         self.log.info("DataMaker is ready")
 
     def get_data(self) -> bool:
-        dataset = pd.read_csv(self.data_path)
-        X = pd.DataFrame(dataset.iloc[:, 1:5].values)
-        y = pd.DataFrame(dataset.iloc[:, 5:].values)
+        """Reads the data."""
+        dataset = pd.read_csv(self.data_path, sep=';')
+        X = dataset.drop('quality', axis=1)
+        y = dataset['quality']
         X.to_csv(self.X_path, index=True)
         y.to_csv(self.y_path, index=True)
         if os.path.isfile(self.X_path) and os.path.isfile(self.y_path):
@@ -43,6 +45,7 @@ class DataMaker():
             return False
 
     def split_data(self, test_size=TEST_SIZE) -> bool:
+        """Performs splitting data into train/test."""
         self.get_data()
         try:
             X = pd.read_csv(self.X_path, index_col=0)
@@ -69,6 +72,7 @@ class DataMaker():
             os.path.isfile(self.test_path[1])
 
     def save_splitted_data(self, df: pd.DataFrame, path: str) -> bool:
+        """Performs saving data into train/test."""
         df = df.reset_index(drop=True)
         df.to_csv(path, index=True)
         self.log.info(f'{path} is saved')

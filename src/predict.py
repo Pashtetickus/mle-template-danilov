@@ -1,25 +1,26 @@
 import argparse
 import configparser
-from datetime import datetime
 import os
 import json
 import pandas as pd
 import pickle
-from sklearn.preprocessing import StandardScaler
 import shutil
 import sys
 import time
 import traceback
 import yaml
+from datetime import datetime
+from sklearn.preprocessing import StandardScaler
 
 from logger import Logger
-
 SHOW_LOG = True
 
 
 class Predictor():
+    """Performs prediction pipleline for a specified model."""
 
     def __init__(self) -> None:
+        """Sets the required parameters."""
         logger = Logger(SHOW_LOG)
         self.config = configparser.ConfigParser()
         self.log = logger.get_logger(__name__)
@@ -33,7 +34,7 @@ class Predictor():
                                  default="LOG_REG",
                                  const="LOG_REG",
                                  nargs="?",
-                                 choices=["LOG_REG", "RAND_FOREST", "KNN", "GNB", "SVM", "D_TREE"])
+                                 choices=["LOG_REG", "RAND_FOREST", "D_TREE"])
         self.parser.add_argument("-t",
                                  "--tests",
                                  type=str,
@@ -57,6 +58,7 @@ class Predictor():
         self.log.info("Predictor is ready")
 
     def predict(self) -> bool:
+        """Performs preditction."""
         args = self.parser.parse_args()
         try:
             classifier = pickle.load(

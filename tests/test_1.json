@@ -1,15 +1,22 @@
 {
     "X": [
         {
-            "0": 6.0,
-            "1": 2.2,
-            "2": 4.0,
-            "3": 1.0
+            "fixed acidity": 8.1,
+            "volatile acidity": 0.82,
+            "citric acid": 0.0, 
+            "residual sugar": 4.1,
+            "chlorides": 0.095, 
+            "free sulfur dioxide": 5.0,
+            "total sulfur dioxide": 14.0,
+            "density": 0.99854,
+            "pH": 3.36,
+            "sulphates": 0.53,
+            "alcohol": 9.6
         }
     ],
     "y": [
         {
-            "0": "Iris-versicolor"
+            "quality": 5
         }
     ]
 }

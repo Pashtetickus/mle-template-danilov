@@ -8,13 +8,10 @@ LOG_FILE = os.path.join(os.getcwd(), "logfile.log")
 
 
 class Logger:
-    """
-        Class for logging behaviour of data exporting - object of ExportingTool class
-    """
+    """Class for logging behaviour of data exporting - object of ExportingTool class."""
 
     def __init__(self, show: bool) -> None:
-        """
-            Re-defined __init__ method which sets show parametr
+        """Sets show parametr.
 
         Args:
             show (bool): if set all logs will be shown in terminal
@@ -22,8 +19,7 @@ class Logger:
         self.show = show
 
     def get_console_handler(self) -> logging.StreamHandler:
-        """
-            Class method the aim of which is getting a console handler to show logs on terminal
+        """Gets a console handler to show logs on terminal.
 
         Returns:
             logging.StreamHandler: handler object for streaming output through terminal
@@ -33,8 +29,7 @@ class Logger:
         return console_handler
 
     def get_file_handler(self) -> logging.FileHandler:
-        """
-            Class method the aim of which is getting a file handler to write logs in file LOG_FILE
+        """Gets a file handler to write logs in file LOG_FILE.
 
         Returns:
             logging.FileHandler: handler object for streaming output through std::filestream
@@ -44,8 +39,7 @@ class Logger:
         return file_handler
 
     def get_logger(self, logger_name: str):
-        """
-            Class method which creates logger with certain name
+        """Creates logger with certain name.
 
         Args:
             logger_name (str): name for logger

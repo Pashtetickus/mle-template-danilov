@@ -1,15 +1,22 @@
 {
     "X": [
         {
-            "0": 5.8,
-            "1": 2.8,
-            "2": 5.1,
-            "3": 2.4
+            "fixed acidity": 10.8,
+            "volatile acidity": 0.47,
+            "citric acid": 0.43, 
+            "residual sugar": 2.1,
+            "chlorides": 0.171, 
+            "free sulfur dioxide": 27.0,
+            "total sulfur dioxide": 66.0,
+            "density": 0.9982,
+            "pH": 3.17,
+            "sulphates": 0.76,
+            "alcohol": 10.8
         }
     ],
     "y": [
         {
-            "0": "Iris-virginica"
+            "quality": 6
         }
     ]
 }
