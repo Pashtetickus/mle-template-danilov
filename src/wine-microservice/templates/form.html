@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Form</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css"/>
+  </head>
+  <body>
+    <h2>Enter wine data vector</h2>
+    <form action="{{ url_for("get_wine_quality")}}" method="post">
+      <label for="wine data">enter wine data:</label>
+      <input type="text" id="wine data" name="winedata" placeholder="0.25,6.333,...">
+      <button type="submit">submit</button>
+  </body>
+</html>
